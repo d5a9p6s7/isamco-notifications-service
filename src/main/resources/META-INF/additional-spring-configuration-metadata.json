@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "configuration.properties.time-zone",
+      "type": "java.lang.String",
+      "description": "Description for configuration.properties.time-zone."
+    },
+    {
+      "name": "configuration.properties.date-format",
+      "type": "java.lang.String",
+      "description": "Description for configuration.properties.date-format."
+    }
+  ]
+}
