@@ -1,8 +1,9 @@
 package co.logike.isamco.notifications.application.controller;
 
 import co.logike.isamco.notifications.application.model.ResponseEvent;
-import co.logike.isamco.notifications.application.model.SendEmailRequest;
-import co.logike.isamco.notifications.application.model.SendEmailResponse;
+import co.logike.isamco.notifications.domain.exception.ApplicationException;
+import co.logike.isamco.notifications.domain.model.SendEmailRequest;
+import co.logike.isamco.notifications.domain.model.SendEmailResponse;
 import co.logike.isamco.notifications.domain.ports.incoming.EmailService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +26,7 @@ public class EmailController extends APIController {
 
     @Operation(summary = "Service for send a Email.")
     @PostMapping("/")
-    public ResponseEntity<ResponseEvent<SendEmailResponse>> sendEmail(@RequestBody final SendEmailRequest request) {
+    public ResponseEntity<ResponseEvent<SendEmailResponse>> sendEmail(@RequestBody final SendEmailRequest request) throws ApplicationException {
 
         log.debug("method: sendEmail({})", request);
         var response = emailService.sendEmail(request);

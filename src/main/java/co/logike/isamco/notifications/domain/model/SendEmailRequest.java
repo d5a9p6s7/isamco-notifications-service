@@ -1,4 +1,4 @@
-package co.logike.isamco.notifications.application.model;
+package co.logike.isamco.notifications.domain.model;
 
 import com.google.gson.Gson;
 import lombok.Builder;

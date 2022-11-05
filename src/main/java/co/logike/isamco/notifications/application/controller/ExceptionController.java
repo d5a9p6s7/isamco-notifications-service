@@ -1,8 +1,7 @@
 package co.logike.isamco.notifications.application.controller;
 
 import co.logike.isamco.notifications.application.model.ResponseEvent;
-import co.logike.isamco.notifications.domain.exception.NoContendException;
-import co.logike.isamco.notifications.domain.exception.PersistenceException;
+import co.logike.isamco.notifications.domain.exception.ApplicationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
@@ -233,20 +232,12 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
         return this.handleExceptionInternal(ex, new ResponseEvent<String>().badRequest(ex.getMessage()), null, HttpStatus.BAD_REQUEST, request);
     }
 
-    @ExceptionHandler(NoContendException.class)
-    public final ResponseEntity<Object> handleNoContentException(
-            NoContendException ex,
+    @ExceptionHandler(ApplicationException.class)
+    public final ResponseEntity<Object> handleApplicationException(
+            ApplicationException ex,
             WebRequest request) {
-        logger.info("method: handleNoContentException()");
-        return this.handleExceptionInternal(ex, new ResponseEvent<String>().noContent(ex.getMessage()), null, HttpStatus.NO_CONTENT, request);
-    }
-
-    @ExceptionHandler(PersistenceException.class)
-    public final ResponseEntity<Object> handlePersistenceException(
-            PersistenceException ex,
-            WebRequest request) {
-        logger.error("method: handlePersistenceException()", ex);
-        return this.handleExceptionInternal(ex, new ResponseEvent<String>().applicationError(ex.getMessage()), null, HttpStatus.INTERNAL_SERVER_ERROR, request);
+        logger.info("method: handleApplicationException()");
+        return this.handleExceptionInternal(ex, new ResponseEvent<String>().applicationError(ex.getMessage()), null, HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler(Exception.class)

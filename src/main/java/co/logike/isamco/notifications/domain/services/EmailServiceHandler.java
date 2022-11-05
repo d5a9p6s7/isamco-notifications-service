@@ -1,7 +1,8 @@
 package co.logike.isamco.notifications.domain.services;
 
-import co.logike.isamco.notifications.application.model.SendEmailRequest;
-import co.logike.isamco.notifications.application.model.SendEmailResponse;
+import co.logike.isamco.notifications.domain.exception.ApplicationException;
+import co.logike.isamco.notifications.domain.model.SendEmailRequest;
+import co.logike.isamco.notifications.domain.model.SendEmailResponse;
 import co.logike.isamco.notifications.domain.ports.incoming.EmailService;
 import co.logike.isamco.notifications.domain.ports.outcoming.SendEmail;
 import co.logike.isamco.notifications.infrastructure.SendEmailHandler;
@@ -19,7 +20,7 @@ public class EmailServiceHandler implements EmailService {
     }
 
     @Override
-    public SendEmailResponse sendEmail(SendEmailRequest request) {
+    public SendEmailResponse sendEmail(SendEmailRequest request) throws ApplicationException {
         log.debug("method: sendEmail({})", request);
         return sendEmail.sendEmail(request);
     }
